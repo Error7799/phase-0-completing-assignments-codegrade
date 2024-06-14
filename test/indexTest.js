@@ -1,20 +1,24 @@
-const jsdom = require("jsdom");
-const path = require("path");
-var chai = require("chai");
-chai.use(require("chai-fs"));
+require ( './helpers.js' );
 
-describe("This assignment", () => {
-  it("has been correctly cloned to your local environment", () => {
-    chai.assert.isDirectory(
-      "./.git",
-      'no ".git" folder was found within "welcome-completing-assignment". Use "git init" to create one'
-    );
+const chai = require("chai");
+chai.use(require("chai-dom"));
+const { expect } = chai;
+
+describe("index.html", () => {
+  it("has a <h1> element", () => {
+    const h1 = document.querySelector("h1");
+    const hint = "Did you code an <h1>Tag</h1> in index.html?";
+
+    expect(h1, hint).to.exist;
   });
 
-  it("has a file named myfile.md", () => {
-    chai.assert.isFile(
-      "./myfile.md",
-      "No file named 'myfile.md' found. Create one in the root of the assignment's directory"
-    );
+  describe("the <h1> element", () => {
+    it('contains the text "Hello, World!"', () => {
+      const h1 = document.querySelector("h1");
+      const hint =
+        'Does your H1 have exactly "Hello, World!" inside the opening and closing tag?';
+
+      expect(h1, hint).to.contain.text("Hello, World!");
+    });
   });
 });
